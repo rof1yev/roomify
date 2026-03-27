@@ -1,3 +1,5 @@
+/// <reference types="react" />
+
 interface AuthState {
   isSignedIn: boolean;
   username: string | null;
