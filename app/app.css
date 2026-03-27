@@ -442,6 +442,10 @@
 
         .demo {
           @apply px-8 bg-white rounded-md hover:bg-zinc-50;
+
+          .icon {
+            @apply ml-2 w-4 h-4;
+          }
         }
       }
 
