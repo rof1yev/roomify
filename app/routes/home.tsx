@@ -48,7 +48,7 @@ export default function Home() {
       return false;
     }
 
-    setProjects((prev) => [...prev, newItem]);
+    setProjects((prev) => [...prev, saved]);
 
     navigate(`/visualizer/${newId}`, {
       state: {
@@ -125,7 +125,7 @@ export default function Home() {
                 sourceImage,
                 timestamp,
               }: DesignItem) => (
-                <div className="project-card group">
+                <div key={id} className="project-card group">
                   <div className="preview">
                     <img src={renderedImage || sourceImage} alt="Project" />
 
