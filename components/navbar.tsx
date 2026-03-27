@@ -27,10 +27,10 @@ const Navbar = () => {
     <header className="navbar">
       <nav className="inner">
         <div className="left">
-          <div className="brand">
+          <a href="/" className="brand">
             <BoxIcon className="logo" />
             <span className="name">Roomify</span>
-          </div>
+          </a>
 
           <ul className="links">
             <li>
