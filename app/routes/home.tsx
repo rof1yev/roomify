@@ -4,17 +4,36 @@ import {
   ArrowRightIcon,
   ArrowUpIcon,
   ClockIcon,
-  Layers,
   LayersIcon,
   PlayIcon,
 } from "lucide-react";
 import Button from "components/ui/button";
+import Upload from "components/upload";
+import { useNavigate } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
-  return [{ title: "Roomify" }, { name: "description", content: "" }];
+  return [
+    { title: "Roomify" },
+    {
+      name: "description",
+      content:
+        "AI-powered architectural visualization platform built with React and Puter; featuring 2D-to-3D photorealistic rendering, serverless workers, high-performance KV storage, and a global community feed.",
+    },
+  ];
 }
 
 export default function Home() {
+  const navigate = useNavigate();
+
+  const handleUploadComplete = async (base64Image: string) => {
+    const newId = Date.now().toString();
+
+    console.log(base64Image);
+
+    navigate(`/visualizer/${newId}`);
+    return true;
+  };
+
   return (
     <div className="home">
       <Navbar />
@@ -54,7 +73,7 @@ export default function Home() {
               <h3>Upload your floor plan</h3>
               <p>Supports JPG, PNG, formats up to 10MB</p>
             </div>
-            <p>Upload images</p>
+            <Upload onComplete={handleUploadComplete} />
           </div>
         </div>
       </section>
