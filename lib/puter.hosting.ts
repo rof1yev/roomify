@@ -21,10 +21,14 @@ export const getOrCreateHostingConfig =
 
     try {
       const created = await puter.hosting.create(subdomain, ".");
-      await puter.kv.set(HOSTING_CONFIG_KEY, { subdomain: created.subdomain });
-      return { subdomain: created.subdomain };
+
+      const record = { subdomain: created.subdomain };
+
+      await puter.kv.set(HOSTING_CONFIG_KEY, record);
+
+      return record;
     } catch (e) {
-      console.log(`Could not find subdomain: ${e}`);
+      console.warn(`Could not find subdomain: ${e}`);
       return null;
     }
   };
@@ -35,7 +39,7 @@ export const uploadImageToHosting = async ({
   projectId,
   label,
 }: StoreHostedImageParams): Promise<HostedAsset | null> => {
-  if (!hosting) return null;
+  if (!hosting || !url) return null;
   if (isHostedUrl(url)) return { url };
 
   try {
