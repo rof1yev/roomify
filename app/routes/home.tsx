@@ -1,17 +1,13 @@
 import Navbar from "components/navbar";
 import type { Route } from "./+types/home";
-import {
-  ArrowRightIcon,
-  ArrowUpIcon,
-  ClockIcon,
-  LayersIcon,
-  PlayIcon,
-} from "lucide-react";
+import { ArrowRightIcon, LayersIcon, PlayIcon } from "lucide-react";
 import Button from "components/ui/button";
 import Upload from "components/upload";
 import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { createProject, getProjects } from "lib/puter.actions";
+import ProjectCard from "components/project-card";
+import Footer from "components/footer";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -125,7 +121,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="projects">
+      <section id="product" className="projects">
         <div className="section-inner">
           <div className="section-head">
             <div className="copy">
@@ -138,48 +134,14 @@ export default function Home() {
           </div>
 
           <div className="projects-grid">
-            {projects.map(
-              ({
-                id,
-                name,
-                renderedImage,
-                sourceImage,
-                timestamp,
-              }: DesignItem) => (
-                <div
-                  key={id}
-                  className="project-card group"
-                  onClick={() => navigate(`/visualizer/${id}`)}
-                >
-                  <div className="preview">
-                    <img src={renderedImage || sourceImage} alt="Project" />
-
-                    <div className="badge">
-                      <span>Community</span>
-                    </div>
-                  </div>
-
-                  <div className="card-body">
-                    <div>
-                      <h3>{name}</h3>
-
-                      <div className="meta">
-                        <ClockIcon size={12} />
-                        <span>{new Date(timestamp).toLocaleDateString()}</span>
-                        <span>By rof1yev</span>
-                      </div>
-                    </div>
-
-                    <div className="arrow">
-                      <ArrowUpIcon size={18} />
-                    </div>
-                  </div>
-                </div>
-              ),
-            )}
+            {projects.map((item: DesignItem) => (
+              <ProjectCard key={item.id} {...item} />
+            ))}
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

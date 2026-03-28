@@ -34,7 +34,7 @@ const Navbar = () => {
 
           <ul className="links">
             <li>
-              <a href="#">Product</a>
+              <a href="#product">Product</a>
             </li>
             <li>
               <a href="#">Pricing</a>
